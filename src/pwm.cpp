@@ -36,3 +36,21 @@ volatile unsigned*  setup_io()
   
 } // setup_iovoid setup_io()
 
+
+void init_Gpio_Out(int voix){
+   OUT_GPIO( voix );
+}
+
+void init_Gpio_In(int voix){
+   INP_GPIO( voix );   
+}
+
+//value 1 or 0
+void gpio_set(int value, int voix){
+    GPIO_SET = value << voix;
+}
+
+void gpio_clr(int value, int voix){
+   GPIO_CLR = value << voix;
+}
+

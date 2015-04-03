@@ -13,8 +13,8 @@ int main( void )
      //volatile unsigned *gpio;
      volatile unsigned *gpio = setup_io();
 
-     INP_GPIO( 8 );
-     OUT_GPIO( 8 );
+   INP_GPIO( 8 );
+   OUT_GPIO( 8 );
 
    while( true )
    {
