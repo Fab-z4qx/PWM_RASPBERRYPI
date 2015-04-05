@@ -15,39 +15,39 @@ const std::string delimiter = ";";
 void updatePwm(int channel, int value)
 {
    int subcycle_time_us = SUBCYCLE_TIME_US_DEFAULT;   
-   clear_channel_gpio(0, channel);
-   init_channel(channel, subcycle_time_us);
-   print_channel(channel);
-   add_channel_pulse(channel,8,0, 100);
+   //clear_channel_gpio(0, channel);
+   init_channel(0, subcycle_time_us);
+   print_channel(0);
+   add_channel_pulse(0,8,0,value);
 }
 
 void parseString(std::string &data)
 {
    size_t pos = 0;
    int i = 0;
+   int channel;
+   int value;
    std::string token;
    while ((pos = data.find(delimiter)) != std::string::npos) 
    {
        token = data.substr(0, pos);
        std::cout << token << std::endl;
        data.erase(0, pos + delimiter.length());
+       switch(i)
+       {
+          case 0:
+            channel = atoi(token.c_str());
+          break;
+          case 1:
+            value = atoi(token.c_str());
+          break;
+       }
        i++;
+       cout << i << endl;
    }
-   std::cout << data << std::endl;
-   
-   int channel;
-   int value;
-   switch(i)
-   {
-      case 1:
-         channel = atoi(data.c_str());
-      break;
-      case 2:      
-         value = atoi(data.c_str());
-      break;
-   }
-   
-   updatePwm(channel, value);
+   std::cout << data << std::endl; 
+   cout << "channel=" << channel << " value=" << value << endl;   
+updatePwm(channel, value);
 }
 
 std::string encodeString(int channel, int value)
